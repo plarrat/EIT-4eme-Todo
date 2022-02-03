@@ -13,19 +13,19 @@ function App() {
         <Container>
           <Row className="mt-4">
             <Col md={6}>
-              <TodoList />
+              <TodoList title="Mangas" />
             </Col>
 
             <Col md={6}>
-              <TodoList />
+              <TodoList title="Animés" />
             </Col>
 
             <Col md={6}>
-              <TodoList />
+              <TodoList title="Jeux PC" />
             </Col>
 
             <Col md={6}>
-              <TodoList />
+              <TodoList title="Jeux Console" />
             </Col>
             
           </Row>

@@ -1,8 +1,9 @@
 import { InputGroup, FormControl, ListGroup, Button } from "react-bootstrap"
 import {useState} from 'react'
 
-export default function TodoList(){
+export default function TodoList(props){
 
+    const {title} = props;
     const [inputTache, setInputTache] = useState("");
     const [taches, setTaches] = useState([]);
 
@@ -21,7 +22,7 @@ export default function TodoList(){
 
     return(
         <div>
-            <h1>Ma TodoList</h1>
+            <h1>{title}</h1>
               <hr />
 
               <InputGroup className="mb-3">
