@@ -27,7 +27,6 @@ export default function TodoList(props){
     function deleteTodosItem(indiceTodo){
         let tmp = [...liste]
         let obj = tmp[indice];
-        console.log(indiceTodo);
         obj.todos.splice(indiceTodo,1);
         tmp[indice] = obj;
         setListe(tmp);
