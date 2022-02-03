@@ -1,28 +1,32 @@
-import { InputGroup, FormControl, ListGroup, Button } from "react-bootstrap"
+import { InputGroup, FormControl, ListGroup, Button, Badge } from "react-bootstrap"
 import {useState} from 'react'
 
 export default function TodoList(props){
 
-    const {title} = props;
+    const {indice} = props;
+    const {liste} = props;
+    const {setListe} = props;
+    const {titre} = props.datas;
+    const {datas} = props;
     const [inputTache, setInputTache] = useState("");
-    const [taches, setTaches] = useState([]);
+   
 
-    let displayTaches = taches.map((item, indice)=>{
+    let displayTaches = datas.todos.map((item, indice)=>{
     return (
-            <ListGroup.Item>{indice + 1}. {item}</ListGroup.Item>
+            <ListGroup.Item key={"todo-" + indice}>{indice + 1}. {item}</ListGroup.Item>
         )
     })
 
-  function add(){
-    let tmp = [...taches]
-    tmp.push(inputTache)
-    setTaches(tmp)
-    setInputTache("")
-  }
+    function add(){
+        let tmp = [...liste]
+        tmp[indice].todos.push(inputTache)
+        setListe(tmp)
+        setInputTache("")
+    }
 
     return(
         <div>
-            <h1>{title}</h1>
+            <h1>{titre}  <Badge pill bg="primary">{datas.todos.length}</Badge></h1>
               <hr />
 
               <InputGroup className="mb-3">

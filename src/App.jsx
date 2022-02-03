@@ -1,5 +1,5 @@
 import './App.css';
-import { Col, Container, Row, Button, InputGroup, FormControl} from 'react-bootstrap'
+import { Col, Container, Row, Button, InputGroup, FormControl, Badge} from 'react-bootstrap'
 
 import AppNavbar from './components/AppNavbar/AppNavbar';
 import TodoList from './components/TodoList/TodoList';
@@ -7,19 +7,43 @@ import {useState} from 'react';
 
 function App() {
   const [inputListe, setInputList] = useState()
-  const [liste, setListe] = useState([])
   
+  let datas = [{
+    id: 1,
+    titre:"Mangas",
+    todos:["Dragon Ball", "One Piece"]
+  },
+  {
+    id: 2,
+    titre:"Animés",
+    todos:["Shingeki No Kyojin"]
+  },
+];
+
+const [liste, setListe] = useState(datas)
+
   let displayListe = liste.map((item,indice)=>{
     return (
       <Col key={"liste-"+indice} md={6}>
-        <TodoList title={item} />
+        <TodoList indice={indice} datas={item} liste={liste} setListe={setListe} />
       </Col>
     )
   })
 
+  function nbTodos(liste){
+    let total = 0;
+    liste.forEach(elem=> total += elem.todos.length)
+    return total;
+  }
+
   function add(){
     let tmp = [...liste];
-    tmp.push(inputListe)
+    let obj = {
+      id:Date.now(),
+      titre:inputListe,
+      todos:[]
+    }
+    tmp.push(obj)
     setListe(tmp)
     setInputList("")
   }
@@ -41,6 +65,10 @@ function App() {
                   Ajouter une liste
                 </Button>
               </InputGroup>
+            </Col>
+
+            <Col md={6} align="right">
+              <h3>Nombre de Todos : <Badge pill bg="primary">{nbTodos(liste)}</Badge></h3>
             </Col>
           </Row>
           <Row className="mt-4">
