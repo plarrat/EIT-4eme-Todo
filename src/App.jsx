@@ -3,24 +3,11 @@ import { Col, Container, Row, Button, InputGroup, FormControl, Badge} from 'reac
 
 import AppNavbar from './components/AppNavbar/AppNavbar';
 import TodoList from './components/TodoList/TodoList';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
 function App() {
   const [inputListe, setInputList] = useState()
-  
-  let datas = [{
-    id: 1,
-    titre:"Mangas",
-    todos:["Dragon Ball", "One Piece"]
-  },
-  {
-    id: 2,
-    titre:"Animés",
-    todos:["Shingeki No Kyojin"]
-  },
-];
-
-const [liste, setListe] = useState(datas)
+  const [liste, setListe] = useState([])
 
   let displayListe = liste.map((item,indice)=>{
     return (
@@ -29,6 +16,16 @@ const [liste, setListe] = useState(datas)
       </Col>
     )
   })
+
+  useEffect(()=>{
+    let datas = localStorage.getItem("Eit-4eme-todos");
+    datas = JSON.parse(datas);
+    setListe(datas);
+  }, [])
+
+  useEffect(()=>{
+    localStorage.setItem("Eit-4eme-todos", JSON.stringify(liste))
+  },[liste])
 
   function nbTodos(liste){
     let total = 0;
